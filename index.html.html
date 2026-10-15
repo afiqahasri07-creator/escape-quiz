@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penjana Kad Ejen M.A.T.A.</title>
+    <!-- Import Font Futuristik Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Import Library html2canvas untuk Download Imej -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background-color: #080d1a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00f0ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+            text-align: center;
+            font-size: 22px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* --- BORANG INPUT --- */
+        .form-container {
+            background: #0f172a;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #00f0ff44;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            color: #00f0ff;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #00f0ff;
+            box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-download {
+            width: 100%;
+            padding: 12px;
+            background: #00f0ff;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            background: #38bdf8;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
+        }
+
+        /* --- PRATONTON KAD (CARD PREVIEW) --- */
+        .card-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 320px;
+        }
+
+        /* Saiz Kad Pratonton */
+        #mata-card {
+            position: relative;
+            width: 520px;
+            height: 310px;
+            background-image: url('mata_template.jpg'); /* Pastikan nama fail imej anda sama */
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Gaya Teks Dinamik Di Atas Kad */
+        .card-text {
+            position: absolute;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            text-shadow: 0 0 6px rgba(0, 240, 255, 0.8);
+            letter-spacing: 0.5px;
+        }
+
+        /* Koordinat Teks Diposisikan Tepat di Sebelah Label pada Gambar */
+        #out-nama {
+            top: 295px;  /* Sesuaikan kedudukan menegak (Y) */
+            left: 245px; /* Sesuaikan kedudukan melintang (X) */
+            color: #00f0ff;
+        }
+
+        #out-id {
+            top: 360px;
+            left: 275px;
+        }
+
+        #out-teras {
+            top: 425px;
+            left: 285px;
+            color: #facc15; /* Kuning terang untuk Teras */
+        }
+
+        #out-negara {
+            top: 490px;
+            left: 255px;
+        }
+
+        #out-tarikh {
+            top: 555px;
+            left: 255px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>M.A.T.A. AGENT ID GENERATOR</h1>
+
+    <div class="container">
+        <!-- BORANG INPUT PENGGUNA -->
+        <div class="form-container">
+            <div class="form-group">
+                <label for="in-nama">NAMA EJEN</label>
+                <input type="text" id="in-nama" value="ALI">
+            </div>
+
+            <div class="form-group">
+                <label for="in-id">NO ID EJEN</label>
+                <input type="text" id="in-id" value="M.A.T.A-07">
+            </div>
+
+            <div class="form-group">
+                <label for="in-teras">TERAS KHAS</label>
+                <select id="in-teras">
+                    <option value="NEURO">NEURO</option>
+                    <option value="INVISO">INVISO</option>
+                    <option value="TECHNO">TECHNO</option>
+                    <option value="KERA">KERA</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="in-negara">NEGARA</label>
+                <input type="text" id="in-negara" value="MALAYSIA">
+            </div>
+
+            <div class="form-group">
+                <label for="in-tarikh">TARIKH DAFTAR</label>
+                <input type="date" id="in-tarikh">
+            </div>
+
+            <button class="btn-download" onclick="downloadCard()">MUAT TURUN KAD (PNG)</button>
+        </div>
+
+        <!-- PRATONTON KAD KELUARAN -->
+        <div class="card-wrapper">
+            <div id="mata-card">
+                <div id="out-nama" class="card-text">ALI</div>
+                <div id="out-id" class="card-text">M.A.T.A-07</div>
+                <div id="out-teras" class="card-text">NEURO</div>
+                <div id="out-negara" class="card-text">MALAYSIA</div>
+                <div id="out-tarikh" class="card-text">2026-10-15</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIK -->
+    <script>
+        // Set Tarikh Automasi Hari Ini
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('in-tarikh').value = today;
+        document.getElementById('out-tarikh').innerText = today;
+
+        const inputs = {
+            nama: document.getElementById('in-nama'),
+            id: document.getElementById('in-id'),
+            teras: document.getElementById('in-teras'),
+            negara: document.getElementById('in-negara'),
+            tarikh: document.getElementById('in-tarikh')
+        };
+
+        const outputs = {
+            nama: document.getElementById('out-nama'),
+            id: document.getElementById('out-id'),
+            teras: document.getElementById('out-teras'),
+            negara: document.getElementById('out-negara'),
+            tarikh: document.getElementById('out-tarikh')
+        };
+
+        // Kemaskini teks secara langsung (real-time)
+        Object.keys(inputs).forEach(key => {
+            inputs[key].addEventListener('input', () => {
+                outputs[key].innerText = inputs[key].value.toUpperCase();
+            });
+        });
+
+        // Fungsi Muat Turun Fail PNG Menggunakan html2canvas
+        function downloadCard() {
+            const cardElement = document.getElementById('mata-card');
+            
+            html2canvas(cardElement, {
+                scale: 3, // Skala resolusi tinggi
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `MATA_ID_${inputs.nama.value.toUpperCase() || 'AGENT'}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
